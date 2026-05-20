@@ -1,0 +1,25 @@
+<table border="1">
+
+<tr>
+<th>ID</th>
+<th>Type</th>
+<th>Amount</th>
+<th>Sender</th>
+<th>Receiver</th>
+<th>Time</th>
+</tr>
+
+{% for row in data %}
+
+<tr>
+<td>{{ row[0] }}</td>
+<td>{{ row[1] }}</td>
+<td>{{ row[2] }}</td>
+<td>{{ row[3] }}</td>
+<td>{{ row[4] }}</td>
+<td>{{ row[5] }}</td>
+</tr>
+
+{% endfor %}
+
+</table>

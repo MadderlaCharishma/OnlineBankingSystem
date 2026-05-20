@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <div class="table-card">
+
+        <h1>🧑‍💼 Admin Dashboard</h1>
+
+        <!-- SEARCH USER -->
+
+        <form method="GET" action="/admin">
+
+            <input type="text"
+                   name="search"
+                   placeholder="Search username">
+
+            <button type="submit">
+                Search
+            </button>
+
+        </form>
+
+        <br>
+
+        <!-- BANK STATISTICS -->
+
+        <h2>🏦 Bank Statistics</h2>
+
+        <div class="stats-box">
+
+            <h3>Total Users: {{ total_users or 0 }}</h3>
+
+            <h3>Total Transactions: {{ total_transactions or 0 }}</h3>
+
+            <h3>Total Bank Balance: ₹{{ total_balance or 0 }}</h3>
+
+            <h3>Blocked Accounts: {{ blocked_accounts or 0 }}</h3>
+
+        </div>
+
+        <br>
+
+        <!-- USERS TABLE -->
+
+        <h2>👥 Users</h2>
+
+        <table border="1">
+
+            <tr>
+
+                <th>ID</th>
+                <th>Username</th>
+                <th>Balance</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Last Login</th>
+                <th>Account Number</th>
+                <th>Action</th>
+
+            </tr>
+
+            {% for u in users %}
+
+            <tr>
+
+                <td>{{ u[0] }}</td>
+                <td>{{ u[1] }}</td>
+                <td>₹{{ u[2] }}</td>
+                <td>{{ u[3] }}</td>
+                <td>{{ u[4] }}</td>
+                <td>{{ u[5] }}</td>
+                <td>{{ u[6] }}</td>
+
+                <td>
+
+                    {% if u[4] == 'blocked' %}
+
+                        <a href="/unblock/{{ u[0] }}">
+                            Unblock
+                        </a>
+
+                    {% else %}
+
+                        <a href="/block/{{ u[0] }}">
+                            Block
+                        </a>
+
+                    {% endif %}
+
+                    |
+
+                    <a href="/delete/{{ u[0] }}">
+                        Delete
+                    </a>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+        <br>
+
+        <!-- TRANSACTIONS -->
+
+        <h2>💸 Transactions</h2>
+
+        <table border="1">
+
+            <tr>
+
+                <th>ID</th>
+                <th>User ID</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Sender</th>
+                <th>Receiver</th>
+                <th>Time</th>
+
+            </tr>
+
+            {% for t in transactions %}
+
+            <tr>
+
+                <td>{{ t[0] }}</td>
+                <td>{{ t[1] }}</td>
+                <td>{{ t[2] }}</td>
+                <td>₹{{ t[3] }}</td>
+                <td>{{ t[4] }}</td>
+                <td>{{ t[5] }}</td>
+                <td>{{ t[6] }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+        <br>
+
+        <!-- LOGIN LOGS -->
+
+        <h2>🕒 Login Logs</h2>
+
+        <table border="1">
+
+            <tr>
+
+                <th>ID</th>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Login Time</th>
+
+            </tr>
+
+            {% for l in logs %}
+
+            <tr>
+
+                <td>{{ l[0] }}</td>
+                <td>{{ l[1] }}</td>
+                <td>{{ l[2] }}</td>
+                <td>{{ l[3] }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+        <br>
+
+        <a href="/logout" class="btn logout-btn">
+            Logout
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
