@@ -40,5 +40,10 @@ python app.py
 ## 📦 Tech Stack
 - Frontend: HTML, CSS, JavaScript
 - Backend: Flask (Python)
+
+
+
+DevelopedBy:
+M.charishma
 - Database: MySQL
 http://127.0.0.1:5000
